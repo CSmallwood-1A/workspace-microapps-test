@@ -24,14 +24,14 @@ main() {
     fi
 
     # manipulate the files via python script
-    python ../format-submission.py \
+    python3 ../format-submission.py \
     --svcacctName "${SVCACCT_NAME}" \
     --svcacctPwd "${SVCACCT_PWD}" \
     --issueId "${JIRA_ISSUEID}" || return 0
 
     # add and push files to remote branch
     git add *
-    git commit -s --message "microapp submission - see issue ${JIRA_ISSUEID} on issues.citrite.net"
+    git commit -sm "microapp submission - see issue ${JIRA_ISSUEID} on issues.citrite.net"
     git push "https://${GITHUB_USERNAME}:${GITHUB_API_KEY}@${REPO_URL}" HEAD:${JIRA_ISSUEID}
 
     # create pull request using GitHub API
